@@ -84,13 +84,6 @@ python Scripts/02_ComplianceSummary.py --skip-pdf
 
 Downloads RVT attachment workbooks from DOORS Next, formats them, and exports PDFs.
 
-Default CSV lookup order:
-
-1. `Inputs/AppD/RM Module List.csv`
-2. `RM/AppD/RM Module List.csv`
-3. `RM/RM Module List.csv`
-4. legacy Terence path
-
 Example:
 
 ```bash
