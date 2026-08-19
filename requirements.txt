@@ -1,0 +1,6 @@
+openpyxl
+requests
+pandas
+playwright
+pywin32
+PyMuPDF
