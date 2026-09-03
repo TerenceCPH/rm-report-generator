@@ -1,16 +1,13 @@
 """02 Compliance Summary: fill template counts, build Appendix B/C, export PDFs."""
 
 import argparse
-import importlib
 import os
 import re
-import sys
 from collections import defaultdict
 
 import openpyxl
 from openpyxl.styles import Font
 
-sys.modules.setdefault("env", importlib.import_module("00_EnvironmentVariables"))
 from env import (
     ALIGN_CENTER_WRAP,
     ALIGN_LEFT_WRAP,
@@ -43,9 +40,9 @@ APPENDIX_C_FILE = os.path.join(
     OUT_DIR, "Appendix C – List Of Proposed Changes In Artifact Types.xlsx"
 )
 
-NAME_ALIASES = {
-    "1263 - Contract 12051.docx": "1263 - Contract 12501.docx",
-}
+# NAME_ALIASES = {
+#     "1263 - Contract 12051.docx": "1263 - Contract 12501.docx",
+# }
 
 INVALID_SHEET_CHARS = re.compile(r'[:\\/?*\[\]]')
 
@@ -53,7 +50,7 @@ INVALID_SHEET_CHARS = re.compile(r'[:\\/?*\[\]]')
 def normalize_module_name(name):
     name = (name or "").strip()
     name = re.sub(r"^\(Main Scope\)\s*", "", name)
-    name = NAME_ALIASES.get(name, name)
+    # name = NAME_ALIASES.get(name, name)
     return name
 
 
@@ -87,7 +84,7 @@ def count_row(row, counts):
     if is_requirement(row.get("REQUIREMENT_TYPE") or "") and tv == "yes":
         counts["tv_req"] += 1
 
-    if is_requirement(row.get("REQUIREMENT_TYPE") or "") and tv == "yes" and init == "no":
+    if is_requirement(row.get("REQUIREMENT_TYPE") or "") and tv == "yes" and init == "no" and dcs == "compliant":
         counts["tv_init_no"] += 1
 
     if is_requirement(row.get("REQUIREMENT_TYPE") or "") and tv == "yes" and dcs == "compliant":

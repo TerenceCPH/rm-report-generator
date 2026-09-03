@@ -2,14 +2,11 @@
 
 import argparse
 import glob
-import importlib
 import os
 import re
-import sys
 
 import fitz
 
-sys.modules.setdefault("env", importlib.import_module("00_EnvironmentVariables"))
 from env import OUTPUT_DIR, SUBMISSION_DIR, output_subdir
 
 # Match header-page text -> PDFs to insert after that page.

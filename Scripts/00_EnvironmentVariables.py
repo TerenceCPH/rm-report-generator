@@ -6,15 +6,15 @@ import os
 import xml.etree.ElementTree as ET
 
 import requests
+import urllib3
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.page import PageMargins
-from requests.packages import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-USERNAME = "YOUR_USERNAME"
-PASSWORD = "YOUR_PASSWORD"
+USERNAME = "terencechan"
+PASSWORD = "MYJK23vm"
 
 SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPTS_DIR)
@@ -26,28 +26,50 @@ if not os.path.exists(os.path.join(ROOT_DIR, "Output")) and os.path.exists(
 
 INPUT_DIR = os.path.join(ROOT_DIR, "Inputs")
 TEMPLATE_DIR = os.path.join(INPUT_DIR, "Template")
+MODULE_LIST_DIR = os.path.join(INPUT_DIR, "Module List")
+DEFAULT_MODULE_LIST_CSV = os.path.join(MODULE_LIST_DIR, "RM Module List.csv")
 SUBMISSION_DIR = os.path.join(INPUT_DIR, "Submission")
+DOCUMENT_IMPORTER_DIR = os.path.join(INPUT_DIR, "DocumentImporter")
 OUTPUT_DIR = os.path.join(ROOT_DIR, "Output")
 XML_DIR = os.path.join(INPUT_DIR, "XML")
 
 XML_SOURCES = {
     "module_list": {
-        "url": "XML_LINK_TO_MODULE_LIST",
-        "cache": "Module List.xml",
+        "url": "https://1263doorsapp.shuion.com.hk:9443/rs/query/408/dataservice?report=400",
+        "cache": "(TUE) Module List.xml",
     },
     "compliance_summary": {
-        "url": "XML_LINK_TO_COMPLIANCE_SUMMARY",
-        "cache": "Compliance Summary_AppB_AppC.xml",
+        "url": "https://1263doorsapp.shuion.com.hk:9443/rs/query/405/dataservice?report=397",
+        "cache": "(TUE) Compliance Summary_AppB_AppC.xml",
     },
     "report_builder": {
-        "url": "XML_LINK_TO_REPORT_BUILDER",
-        "cache": "Report Builder.xml",
+        "url": "https://1263doorsapp.shuion.com.hk:9443/rs/query/403/dataservice?report=395",
+        "cache": "(TUE) Report Builder.xml",
     },
     "requirements_checker": {
-        "url": "XML_LINK_TO_REQUIREMENTS_CHECKER",
-        "cache": "Requirements Checker.xml",
+        "url": "https://1263doorsapp.shuion.com.hk:9443/rs/query/367/dataservice?report=359",
+        "cache": "(TUE) Requirements Checker.xml",
     },
 }
+
+# XML_SOURCES = {
+#     "module_list": {
+#         "url": "https://1263doorsapp.shuion.com.hk:9443/rs/query/325/dataservice?report=317",
+#         "cache": "(OYB-SHD) Module List.xml",
+#     },
+#     "compliance_summary": {
+#         "url": "https://1263doorsapp.shuion.com.hk:9443/rs/query/145/dataservice?report=137",
+#         "cache": "(OYB-SHD) Compliance Summary_AppB_AppC.xml",
+#     },
+#     "report_builder": {
+#         "url": "https://1263doorsapp.shuion.com.hk:9443/rs/query/139/dataservice?report=131",
+#         "cache": "(OYB-SHD) Report Builder.xml",
+#     },
+#     "requirements_checker": {
+#         "url": "https://1263doorsapp.shuion.com.hk:9443/rs/query/369/dataservice?report=361",
+#         "cache": "(OYB-SHD) Requirements Checker.xml",
+#     },
+# }
 
 FONT_NAME = "Arial"
 THIN_SIDE = Side(border_style="thin", color="000000")

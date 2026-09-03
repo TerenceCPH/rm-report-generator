@@ -1,16 +1,13 @@
 """01 Report Builder: XML (live or cache) -> formatted Excel + PDF."""
 
 import argparse
-import importlib
 import os
 import re
-import sys
 
 import openpyxl
 from openpyxl.styles import Border, Font
 from openpyxl.utils import get_column_letter
 
-sys.modules.setdefault("env", importlib.import_module("00_EnvironmentVariables"))
 from env import (
     ALIGN_CENTER_WRAP,
     ALIGN_WRAP,
@@ -39,9 +36,9 @@ OUTPUT_FILE = os.path.join(OUTPUT_DIR, "Appendix A – Report Builder.xlsx")
 # Pair index -> (val_tag, id_tag, title_tag, url_tag, prefix_header, text_header)
 VAL_PAIRS = [
     ("VAL", "REFERENCE_ID", "URL1_title", "URL1", "Doc Prefix", "Scope / IRS"),
-    ("VAL1", "REFERENCE_ID1", "URL2_title", "URL2", "Satisfied by", "Design Deliverables (Level 1)"),
-    ("VAL2", "REFERENCE_ID2", "URL3_title", "URL3", "Satisfied by", "Design Deliverables (Level 2)"),
-    ("VAL3", "REFERENCE_ID3", "URL4_title", "URL4", "Verified by", "Design Deliverables (Level 3)"),
+    ("VAL2", "REFERENCE_ID1", "URL2_title", "URL2", "Satisfied by", "Design Deliverables (Level 1)"),
+    ("VAL3", "REFERENCE_ID2", "URL3_title", "URL3", "Satisfied by", "Design Deliverables (Level 2)"),
+    ("VAL4", "REFERENCE_ID3", "URL4_title", "URL4", "Verified by", "Design Deliverables (Level 3)"),
 ]
 
 
@@ -202,7 +199,7 @@ def parse_args():
         type=int,
         default=3,
         choices=[1, 2, 3, 4],
-        help="How many VAL pairs to display (VAL .. VAL3). Default: 3.",
+        help="How many VAL pairs to display (VAL, VAL2, VAL3, VAL4). Default: 3.",
     )
     parser.add_argument("--xml", help="Force a local XML file (skip the live URL).")
     parser.add_argument("--output", default=OUTPUT_FILE, help="Output .xlsx path.")
